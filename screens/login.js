@@ -1,11 +1,16 @@
 // Login.js
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import firebaseService  from '../firebase.js'
+
 export default class Login extends React.Component {
   state = { email: '', password: '', errorMessage: null }
   handleLogin = () => {
-    // TODO: Firebase stuff...
-    console.log('handleLogin')
+    firebaseService
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => this.props.navigation.navigate('Main'))
+      .catch(error => this.setState({ errorMessage: error.message }))
   }
   render() {
     return (

@@ -2,13 +2,11 @@
 import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import firebaseService  from '../firebase.js'
-console.log(firebaseService);
 
 export default class Loading extends React.Component {
 
 
   componentDidMount() {
-    console.log('componentDidMount');
     firebaseService.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? 'Main' : 'SignUp')
     })
@@ -22,6 +20,7 @@ export default class Loading extends React.Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
